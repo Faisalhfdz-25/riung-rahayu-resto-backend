@@ -1,10 +1,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">Stisla</a>
+            <a href="index.html">Riung Rahayu Resto</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="index.html">RRR</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
@@ -13,34 +13,30 @@
                 <a href="#"
                     class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 <ul class="dropdown-menu">
-                    <li class='{{ Request::is('dashboard-general-dashboard') ? 'active' : '' }}'>
+                    <li class='{{ Request::is('home') ? 'active' : '' }}'>
                         <a class="nav-link"
-                            href="{{ url('dashboard-general-dashboard') }}">General Dashboard</a>
-                    </li>
-                    <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
-                        <a class="nav-link"
-                            href="{{ url('dashboard-ecommerce-dashboard') }}">Ecommerce Dashboard</a>
+                            href="{{ route('home') }}">General Dashboard</a>
                     </li>
                 </ul>
             </li>
-            <li class="menu-header">Starter</li>
+            <li class="menu-header">Data Master</li>
             {{-- <li class="nav-item dropdown {{ $type_menu === 'layout' ? 'active' : '' }}"> --}}
                 <li class="nav-item dropdown">
                 <a href="#"
                     class="nav-link has-dropdown"
-                    data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
+                    data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Data Master</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('layout-default-layout') ? 'active' : '' }}">
+                    <li class="{{ Request::is('products') ? 'active' : '' }}">
                         <a class="nav-link"
-                            href="{{ url('layout-default-layout') }}">Default Layout</a>
+                            href="{{ route('products.index') }}">Product</a>
                     </li>
                     <li class="{{ Request::is('transparent-sidebar') ? 'active' : '' }}">
                         <a class="nav-link"
-                            href="{{ url('transparent-sidebar') }}">Transparent Sidebar</a>
+                            href="{{ url('transparent-sidebar') }}">Category</a>
                     </li>
-                    <li class="{{ Request::is('layout-top-navigation') ? 'active' : '' }}">
+                    <li class="{{ Request::is('user') ? 'active' : '' }}">
                         <a class="nav-link"
-                            href="{{ url('layout-top-navigation') }}">Top Navigation</a>
+                            href="{{ route('user.index') }}">Users</a>
                     </li>
                 </ul>
             </li>

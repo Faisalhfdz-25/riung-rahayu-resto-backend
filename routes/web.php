@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -19,9 +20,12 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-        Route::get('home', function() {
-            return view('pages.dashboard');
-        })->name('home');
+    Route::get('home', function () {
+        return view('pages.dashboard');
+    })->name('home');
 
-        Route::resource('user', UserController::class)->only(['index','store','update','destroy']);
+    Route::resource('user', UserController::class)->only(['index', 'store', 'update', 'destroy'])->names('user');
+    Route::resource('products', ProductController::class)->names('products');
+    // Custom route for updating product image
+    Route::put('products/{product}/change-image', [ProductController::class, 'updateImage'])->name('products.change-image');
 });
