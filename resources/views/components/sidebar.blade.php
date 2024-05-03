@@ -30,9 +30,9 @@
                         <a class="nav-link"
                             href="{{ route('products.index') }}">Product</a>
                     </li>
-                    <li class="{{ Request::is('transparent-sidebar') ? 'active' : '' }}">
+                    <li class="{{ Request::is('categories') ? 'active' : '' }}">
                         <a class="nav-link"
-                            href="{{ url('transparent-sidebar') }}">Category</a>
+                            href="{{ route('categories.index') }}">Category</a>
                     </li>
                     <li class="{{ Request::is('user') ? 'active' : '' }}">
                         <a class="nav-link"

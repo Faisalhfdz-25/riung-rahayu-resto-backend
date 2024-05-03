@@ -26,11 +26,27 @@
                             </div>
                             <div class="col-md-8">
                                 <h3>{{ $product->name }}</h3>
-                                <p>{{ $product->description }}</p>
-                                <p><strong>Price:</strong> Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                                <p><strong>Stock:</strong> {{ $product->stock }}</p>
-                                <p><strong>Status:</strong> {!! $product->status ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-secondary">Inactive</span>' !!}</p>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <span class="label">Description:</span>
+                                        <span class="value">{{ $product->description }}</span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="label">Price:</span>
+                                        <span class="value">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="label">Stock:</span>
+                                        <span class="value">{{ $product->stock }}</span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="label">Status:</span>
+                                        <span class="value">{!! $product->status ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-secondary">Inactive</span>' !!}</span>
+                                    </li>
+                                </ul>
                             </div>
+                            
+                            
                         </div>
                     </div>
                 </div>

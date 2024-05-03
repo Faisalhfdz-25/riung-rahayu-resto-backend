@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -28,4 +29,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('products', ProductController::class)->names('products');
     // Custom route for updating product image
     Route::put('products/{product}/change-image', [ProductController::class, 'updateImage'])->name('products.change-image');
+
+    Route::resource('categories', CategoryController::class)->names('categories');
 });
