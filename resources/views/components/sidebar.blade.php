@@ -32,7 +32,7 @@
                     </li>
                     <li class="{{ Request::is('categories') ? 'active' : '' }}">
                         <a class="nav-link"
-                            href="{{ route('categories.index') }}">Category</a>
+                            href="{{ route('categories.index') }}">Stands</a>
                     </li>
                     <li class="{{ Request::is('user') ? 'active' : '' }}">
                         <a class="nav-link"

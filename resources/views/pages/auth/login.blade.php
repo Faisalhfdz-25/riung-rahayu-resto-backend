@@ -37,10 +37,10 @@
                             alt="logo"
                             width="80"
                             class="shadow-light rounded-circle mb-5 mt-2">
-                        <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">Stisla</span>
+                        <h4 class="text-dark font-weight-normal">Selamat Datang di, <span class="font-weight-bold">Riung Rahayu</span>
                         </h4>
-                        <p class="text-muted">Before you get started, you must login or register if you don't already
-                            have an account.</p>
+                        <p class="text-muted">Sebelum memulai, Anda harus login</p>
+                        <p class="text-muted">Selamat Bekerja,</p>
                         <form method="POST"
                             action="{{ route('login') }}"
                             class="needs-validation"
@@ -87,23 +87,10 @@
                                     @enderror
                             </div>
 
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox"
-                                        name="remember"
-                                        class="custom-control-input"
-                                        tabindex="3"
-                                        id="remember-me">
-                                    <label class="custom-control-label"
-                                        for="remember-me">Remember Me</label>
-                                </div>
-                            </div>
+                            
 
                             <div class="form-group text-right">
-                                <a href="auth-forgot-password.html"
-                                    class="float-left mt-3">
-                                    Forgot Password?
-                                </a>
+                               
                                 <button type="submit"
                                     class="btn btn-primary btn-lg btn-icon icon-right"
                                     tabindex="4">
@@ -111,9 +98,7 @@
                                 </button>
                             </div>
 
-                            <div class="mt-5 text-center">
-                                Don't have an account? <a href="auth-register.html">Create new one</a>
-                            </div>
+                           
                         </form>
 
                         
@@ -124,15 +109,9 @@
                     <div class="absolute-bottom-left index-2">
                         <div class="text-light p-5 pb-2">
                             <div class="mb-5 pb-3">
-                                <h1 class="display-4 font-weight-bold mb-2">Good Morning</h1>
-                                <h5 class="font-weight-normal text-muted-transparent">Bali, Indonesia</h5>
+                                <h1 class="display-4 font-weight-bold mb-2"><span id="greeting-message"></span></h1>
+                                <h5 class="font-weight-normal text-muted-transparent">Purwakarta, Indonesia</h5>
                             </div>
-                            Photo by <a class="text-light bb"
-                                target="_blank"
-                                href="https://unsplash.com/photos/a8lTjWJJgLA">Justin Kauffman</a> on <a
-                                class="text-light bb"
-                                target="_blank"
-                                href="https://unsplash.com">Unsplash</a>
                         </div>
                     </div>
                 </div>
@@ -156,6 +135,30 @@
     <!-- Template JS File -->
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    <script>
+        // Fungsi untuk mengubah pesan selamat berdasarkan waktu saat ini
+        function updateGreeting() {
+            var currentTime = new Date().getHours();
+            var greeting;
+    
+            if (currentTime >= 5 && currentTime < 12) {
+                greeting = 'Selamat pagi';
+            } else if (currentTime >= 12 && currentTime < 18) {
+                greeting = 'Selamat siang';
+            } else {
+                greeting = 'Selamat malam';
+            }
+    
+            // Ubah teks pesan selamat
+            document.getElementById('greeting-message').innerText = greeting;
+        }
+    
+        // Panggil fungsi untuk pertama kali saat halaman dimuat
+        updateGreeting();
+    
+        // Fungsi untuk memperbarui pesan selamat setiap menit
+        setInterval(updateGreeting, 60000); // 60000 milidetik = 1 menit
+    </script>
 </body>
 
 </html>

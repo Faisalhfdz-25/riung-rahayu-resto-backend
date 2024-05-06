@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -57,19 +58,27 @@ class UserController extends Controller
             'password' => 'required|string|min:8',
             'roles' => 'required|string|in:admin,staff,owner,user'
         ]);
-    
+
         if ($validator->fails()) {
             // Mengambil pesan kesalahan pertama dari validator
             $errorMessage = $validator->errors()->first();
-    
+
             // Redirect kembali ke halaman indeks dengan pesan kesalahan
             return redirect()->route('user.index')->withErrors($errorMessage);
         }
-    
+
         try {
-            // Coba membuat pengguna baru
-            User::create($request->all());
-    
+            // Menghash password sebelum menyimpannya menggunakan Hash::
+            $hashedPassword = Hash::make($request->password);
+
+            // Buat pengguna baru dengan password yang dihash
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $hashedPassword,
+                'roles' => $request->roles
+            ]);
+
             // Jika berhasil, kembalikan respons sukses
             return redirect()->route('user.index')->with('success', 'User created successfully!');
         } catch (\Exception $e) {
