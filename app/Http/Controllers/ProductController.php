@@ -68,7 +68,7 @@ class ProductController extends Controller
 
         // Handle image upload
         $imagePath = $request->file('image')->store('public/product_images');
-        $imagePath = str_replace('public/', '', $imagePath);
+        $imagePath = str_replace('public/', 'storage/', $imagePath); // Mengubah path sesuai dengan kebutuhan
 
         $product = Product::create([
             'name' => $request->name,
@@ -112,8 +112,13 @@ class ProductController extends Controller
 
         // Handle image upload
         if ($request->hasFile('image')) {
+            // Delete existing image file
+            Storage::delete(str_replace('storage/', 'public/', $product->image));
+
+            // Upload new image
             $imagePath = $request->file('image')->store('public/product_images');
-            $imagePath = str_replace('public/', '', $imagePath);
+            $imagePath = str_replace('public/', 'storage/', $imagePath);
+
             $product->image = $imagePath;
         }
 
@@ -128,7 +133,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product updated successfully!');
     }
 
-     /**
+    /**
      * Update the product image.
      */
     public function updateImage(Request $request, Product $product)
@@ -142,11 +147,11 @@ class ProductController extends Controller
         }
 
         // Delete existing image file
-        Storage::delete('public/' . $product->image);
+        Storage::delete(str_replace('storage/', 'public/', $product->image));
 
         // Handle image upload
         $imagePath = $request->file('image')->store('public/product_images');
-        $imagePath = str_replace('public/', '', $imagePath);
+        $imagePath = str_replace('public/', 'storage/', $imagePath);
 
         // Update product image
         $product->image = $imagePath;
@@ -155,15 +160,14 @@ class ProductController extends Controller
         return redirect()->route('products.show', $product->id)->with('success', 'Product image updated successfully!');
     }
 
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Product $product)
     {
         // Delete image file when deleting product
-        Storage::delete('public/' . $product->image);
-        
+        Storage::delete(str_replace('storage/', 'public/', $product->image));
+
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully');
     }

@@ -14,7 +14,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid">
+                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="img-fluid">
+
                                 <form action="{{ route('products.change-image', $product->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
@@ -41,7 +42,7 @@
                                     </li>
                                     <li class="list-group-item">
                                         <span class="label">Status:</span>
-                                        <span class="value">{!! $product->status ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-secondary">Inactive</span>' !!}</span>
+                                        <span class="value">{!! $product->status ? '<span class="badge badge-success">Ready</span>' : '<span class="badge badge-secondary">Habis</span>' !!}</span>
                                     </li>
                                 </ul>
                             </div>

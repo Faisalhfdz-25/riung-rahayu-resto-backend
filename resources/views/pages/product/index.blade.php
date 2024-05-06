@@ -27,10 +27,10 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Category</th>
-                                        <th>Price</th>
-                                        <th>Stock</th>
+                                        <th>Nama</th>
+                                        <th>Stand</th>
+                                        <th>Harga</th>
+                                        <th>Stok</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -47,8 +47,8 @@
                                             <td>{{ 'Rp ' . number_format($product->price, 0, ',', '.') }}</td>
                                             <td>{{ $product->stock }}</td>
                                             <td>{!! $product->status
-                                                ? '<span class="badge badge-success">Active</span>'
-                                                : '<span class="badge badge-secondary">Inactive</span>' !!}</td>
+                                                ? '<span class="badge badge-success">Ready</span>'
+                                                : '<span class="badge badge-secondary">Habis</span>' !!}</td>
 
                                             <td>
                                                 <div class="d-flex">
@@ -107,7 +107,7 @@
                                     <input type="text" name="name" id="name" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="category_id">Category</label>
+                                    <label for="category_id">Stand</label>
                                     <select name="category_id" id="category_id" class="form-control" required>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -122,7 +122,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="price">Price</label>
+                                <label for="price">Harga</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Rp</span>
@@ -144,11 +144,11 @@
                                     <label class="selectgroup-item">
                                         <input type="radio" name="status" value="1" class="selectgroup-input"
                                             checked="">
-                                        <span class="selectgroup-button">Active</span>
+                                        <span class="selectgroup-button">Ready</span>
                                     </label>
                                     <label class="selectgroup-item">
                                         <input type="radio" name="status" value="0" class="selectgroup-input">
-                                        <span class="selectgroup-button">Inactive</span>
+                                        <span class="selectgroup-button">Habis</span>
                                     </label>
                                 </div>
                             </div>
@@ -196,7 +196,7 @@
                                             class="form-control" value="{{ $product->name }}" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="edit_category_id{{ $product->id }}">Category</label>
+                                        <label for="edit_category_id{{ $product->id }}">Stand</label>
                                         <select name="category_id" id="edit_category_id{{ $product->id }}"
                                             class="form-control" required>
                                             @foreach ($categories as $category)
@@ -219,7 +219,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="edit_price{{ $product->id }}">Price</label>
+                                    <label for="edit_price{{ $product->id }}">Harga</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Rp</span>
@@ -243,13 +243,13 @@
                                             <input type="radio" name="status" value="1"
                                                 class="selectgroup-input" id="edit_status_active{{ $product->id }}"
                                                 {{ $product->status == 1 ? 'checked' : '' }}>
-                                            <span class="selectgroup-button">Active</span>
+                                            <span class="selectgroup-button">Ready</span>
                                         </label>
                                         <label class="selectgroup-item">
                                             <input type="radio" name="status" value="0"
                                                 class="selectgroup-input" id="edit_status_inactive{{ $product->id }}"
                                                 {{ $product->status == 0 ? 'checked' : '' }}>
-                                            <span class="selectgroup-button">Inactive</span>
+                                            <span class="selectgroup-button">Habis</span>
                                         </label>
                                     </div>
                                 </div>
