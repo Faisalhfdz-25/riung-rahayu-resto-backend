@@ -14,7 +14,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="img-fluid">
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid">
 
                                 <form action="{{ route('products.change-image', $product->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf

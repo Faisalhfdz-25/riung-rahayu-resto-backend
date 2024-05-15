@@ -50,83 +50,68 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'description' => 'nullable',
-            'image' => 'required|image',
-        ]);
+ * Store a newly created resource in storage.
+ */
+public function store(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'name' => 'required',
+        'description' => 'nullable',
+        'image' => 'required|image',
+    ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+    if ($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], 422);
+    }
+
+    // Handle image upload
+    $imagePath = $request->file('image')->store('public/category_images');
+    $imagePath = str_replace('public/', 'storage/', $imagePath); // Perubahan disini
+
+    $category = Category::create([
+        'name' => $request->name,
+        'description' => $request->description,
+        'image' => $imagePath,
+    ]);
+
+    return redirect()->route('categories.index')->with('success', 'Category created successfully!');
+}
+
+/**
+ * Update the specified resource in storage.
+ */
+public function update(Request $request, Category $category)
+{
+    $validator = Validator::make($request->all(), [
+        'name' => 'required',
+        'description' => 'nullable',
+        'image' => 'nullable|image',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], 422);
+    }
+
+    // Handle image upload
+    if ($request->hasFile('image')) {
+        // Delete old image if exists
+        if ($category->image) {
+            Storage::delete('public/' . $category->image);
         }
 
-        //Handle image upload
+        // Store new image
         $imagePath = $request->file('image')->store('public/category_images');
-        $imagePath = str_replace('public', '', $imagePath);
-
-        $category = Category::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $imagePath,
-        ]);
-
-        return redirect()->route('categories.index')->with('success', 'Category created successfully!');
+        $imagePath = str_replace('public/', 'storage/', $imagePath); // Perubahan disini
+        $category->image = $imagePath;
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+    $category->name = $request->name;
+    $category->description = $request->description;
+    $category->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    return redirect()->route('categories.index')->with('success', 'Category updated successfully!');
+}
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Category $category)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'description' => 'nullable',
-            'image' => 'nullable|image',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            // Delete old image if exists
-            if ($category->image) {
-                Storage::delete('public/' . $category->image);
-            }
-
-            // Store new image
-            $imagePath = $request->file('image')->store('public/category_images');
-            $imagePath = str_replace('public/', '', $imagePath);
-            $category->image = $imagePath;
-        }
-
-        $category->name = $request->name;
-        $category->description = $request->description;
-        $category->save();
-
-        return redirect()->route('categories.index')->with('success', 'Category updated successfully!');
-    }
 
 
     /**
