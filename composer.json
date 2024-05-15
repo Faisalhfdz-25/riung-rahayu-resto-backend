@@ -11,15 +11,18 @@
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "midtrans/midtrans-php": "^2.5",
         "realrashid/sweet-alert": "^7.1",
         "yajra/laravel-datatables-oracle": "^10.11"
     },
     "require-dev": {
+        "beyondcode/laravel-er-diagram-generator": "^3.0",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
+        "phpmetrics/phpmetrics": "^0.0.1",
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0"
     },

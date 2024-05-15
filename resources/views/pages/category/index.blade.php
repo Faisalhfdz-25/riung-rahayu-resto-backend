@@ -39,7 +39,7 @@
                                         <tr>
                                             <td>{{ $counter++ }}</td>
                                             <td>{{ $category->name }}</td>
-                                            <td><img src="{{ asset('storage/' . $category->image) }}"
+                                            <td><img src="{{ asset($category->image) }}"
                                                     alt="{{ $category->name }}" style="max-width: 100px; max-height: 100px;"
                                                     class="mt-2 mb-2"></td>
 
